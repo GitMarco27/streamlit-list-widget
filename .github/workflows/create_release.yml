@@ -18,7 +18,7 @@ jobs:
       uses: softprops/action-gh-release@v1
       with:
         tag_name: ${{ github.ref }}  # This uses the tag that triggered the workflow
-        release_name: Release ${{ github.ref }}  # You can customize the release name
+        name: Release ${{ github.ref }}  # Updated to use 'name' instead of 'release_name'
         draft: false
         prerelease: false
       env:
