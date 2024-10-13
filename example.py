@@ -3,7 +3,8 @@ import sys
 import streamlit as st
 
 # Temporarily remove the current directory from sys.path
-sys.path.remove("")
+if "" in sys.path:
+    sys.path.remove("")
 
 from streamlit_list_widget import streamlit_list_widget
 
