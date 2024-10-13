@@ -1,13 +1,18 @@
 from pathlib import Path
+import toml  # Add this import
 
 import setuptools
 
 this_directory = Path(__file__).parent
 long_description = (this_directory / "README.md").read_text()
 
+# Read version from pyproject.toml
+pyproject = toml.load(this_directory / "pyproject.toml")  # Add this line
+version = pyproject['tool']['poetry']['version']  # Add this line
+
 setuptools.setup(
     name="streamlit-list-widget",
-    version="0.1.0",
+    version=version,  # Update this line
     author="Marco Sanguineti",
     author_email="marco.sanguineti.info@gmail.com",
     description="Streamlit component that allows you to do handle a list of clickable items",

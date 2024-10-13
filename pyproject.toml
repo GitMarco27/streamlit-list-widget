@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "streamlit-list-widget"
-version = "0.1.0"
+version = "0.1.1"
 description = "👑 Streamlit list widget component"
 authors = ["GitMarco27 <marco.sanguineti.info@gmail.com>"]
 license = "Apache-2.0 license"
@@ -12,6 +12,8 @@ streamlit = "^1.39.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.3"
+setuptools = "^75.1.0"
+twine = "^5.1.1"
 
 [build-system]
 requires = ["poetry-core"]
