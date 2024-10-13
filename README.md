@@ -1,4 +1,5 @@
 # streamlit-list-widget
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://st-list-widget-component.streamlit.app/)
 
 Streamlit component that allows you to create a list of clickable items.
 
