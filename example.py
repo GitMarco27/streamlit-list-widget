@@ -12,7 +12,9 @@ images = {
 }
 
 with st.sidebar:
-    selected = streamlit_list_widget(items=list(images.keys()), title="Dogs")
+    selected = streamlit_list_widget.streamlit_list_widget(
+        items=list(images.keys()), title="Dogs"
+    )
 
 if selected:
     st.title(selected)
