@@ -1,6 +1,8 @@
+import importlib
+
 import streamlit as st
 
-from streamlit_list_widget import streamlit_list_widget
+streamlit_list_widget = importlib.import_module("streamlit_list_widget")
 
 images = {
     "Golden Retriever": "https://www.zooplus.it/magazine/wp-content/uploads/2017/05/fotolia_66749097.jpg",
