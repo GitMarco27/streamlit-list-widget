@@ -1,8 +1,11 @@
-import importlib
+import sys
 
 import streamlit as st
 
-streamlit_list_widget = importlib.import_module("streamlit_list_widget")
+# Temporarily remove the current directory from sys.path
+sys.path.remove("")
+
+from streamlit_list_widget import streamlit_list_widget
 
 images = {
     "Golden Retriever": "https://www.zooplus.it/magazine/wp-content/uploads/2017/05/fotolia_66749097.jpg",
@@ -12,9 +15,7 @@ images = {
 }
 
 with st.sidebar:
-    selected = streamlit_list_widget.streamlit_list_widget(
-        items=list(images.keys()), title="Dogs"
-    )
+    selected = streamlit_list_widget(items=list(images.keys()), title="Dogs")
 
 if selected:
     st.title(selected)
