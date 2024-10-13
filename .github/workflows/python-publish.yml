@@ -34,7 +34,7 @@ jobs:
       working-directory: ./streamlit_list_widget/frontend
       run: npm install  # or 'yarn install' if you use Yarn
 
-    - name: Build frontenxd
+    - name: Build frontend
       working-directory: ./streamlit_list_widget/frontend
       run: npm run build  # or 'yarn build' if you use Yarn
 
@@ -45,7 +45,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install setuptools twine
+        pip install setuptools twine toml
     - name: Build package
       run: python setup.py sdist bdist_wheel
     - name: Publish package
