@@ -45,7 +45,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install setuptools twine toml
+        pip install setuptools twine toml wheel
     - name: Build package
       run: python setup.py sdist bdist_wheel
     - name: Publish package
