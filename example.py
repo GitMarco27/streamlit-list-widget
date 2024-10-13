@@ -21,3 +21,5 @@ with st.sidebar:
 if selected:
     st.title(selected)
     st.image(images[selected], caption=selected)
+else:
+    st.info("Select an item from the list widget")
