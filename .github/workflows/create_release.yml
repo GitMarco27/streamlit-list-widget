@@ -1,0 +1,25 @@
+name: Create Release on Tag
+
+on:
+  push:
+    tags:
+      - 'v*'  # Adjust the tag pattern as needed (e.g., v1.0.0)
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out the repository
+      uses: actions/checkout@v3
+
+    - name: Create Release
+      id: create_release
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: ${{ github.ref }}  # This uses the tag that triggered the workflow
+        release_name: Release ${{ github.ref }}  # You can customize the release name
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

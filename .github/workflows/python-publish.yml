@@ -22,6 +22,20 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+    # Step to build the frontend
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18.x'  # Specify the required Node.js version
+
+    - name: Install frontend dependencies
+      working-directory: ./streamlit_list_widget/frontend
+      run: npm install  # or 'yarn install' if you use Yarn
+
+    - name: Build frontend
+      working-directory: ./streamlit_list_widget/frontend
+      run: npm run build  # or 'yarn build' if you use Yarn
+
     - name: Set up Python
       uses: actions/setup-python@v3
       with:
