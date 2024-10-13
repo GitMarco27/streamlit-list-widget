@@ -1,5 +1,5 @@
 import os
-from typing import List
+from typing import List, Literal
 
 import streamlit.components.v1 as components
 
@@ -48,8 +48,8 @@ else:
 # our component's API: we can pre-process its input args, post-process its
 # output value, and add a docstring for users.
 def streamlit_list_widget(
-    items: List[str], title: str = "Chat history", key=None
-) -> str:  # Added title parameter
+    items: List[str], title: str = "Chat history", theme: Literal["light", "dark"] = "light", key=None  # Added theme parameter
+) -> str:
     """Create a new instance of "streamlit_list_widget".
 
     Parameters
@@ -58,22 +58,18 @@ def streamlit_list_widget(
         A list of strings to display
     title: str
         The title to display above the list of items.
+    theme: str
+        The theme to apply to the component ("light" or "dark").
     key: str or None
-        An optional key that uniquely identifies this component. If this is
-        None, and the component's arguments are changed, the component will
-        be re-mounted in the Streamlit frontend and lose its current state.
+        An optional key that uniquely identifies this component.
 
     Returns
     -------
     str
         The item (str) that was clicked by the user.
     """
-    # Call through to our private component function. Arguments we pass here
-    # will be sent to the frontend, where they'll be available in an "args"
-    # dictionary.
     component_value = _component_func(
-        items=items, title=title, key=key, default=None  # Added title to args
+        items=items, title=title, theme=theme, key=key, default=None  # Added theme to args
     )
 
-    # Return the value of the clicked item.
     return component_value

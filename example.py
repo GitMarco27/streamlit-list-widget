@@ -16,7 +16,10 @@ images = {
 }
 
 with st.sidebar:
-    selected = streamlit_list_widget(items=list(images.keys()), title="Dogs")
+    theme = st.selectbox("Theme", options=["light", "dark"])
+    selected = streamlit_list_widget(
+        items=list(images.keys()), title="Dogs", theme=theme
+    )  # Added theme parameter
 
 if selected:
     st.title(selected)

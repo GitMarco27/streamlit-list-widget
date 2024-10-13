@@ -17,6 +17,13 @@ class MyComponent extends StreamlitComponentBase<State> {
   public render = (): ReactNode => {
     const items = this.props.args["items"] || []
     const title = this.props.args["title"] || "Chat history"; // Added title variable
+    const theme = this.props.args["theme"] || "light"; // Added theme variable
+
+    // Define colors based on the theme
+    const backgroundColor = theme === "dark" ? '#262730' : '#F0F2F6'; // Default background color for dark theme
+    const hoverColor = theme === "dark" ? '#1A1C24' : '#e0e0e0'; // Hover color remains the same
+    const clickedColor = theme === "dark" ? '#0F1116' : '#d0d0d0'; // Clicked color for dark theme
+    const fontColor = theme === "dark" ? '#FFFFFF' : '#000000'; // Set font color to white for dark theme
 
     // Ensure items is an array
     if (!Array.isArray(items)) {
@@ -27,35 +34,34 @@ class MyComponent extends StreamlitComponentBase<State> {
       )
     }
 
-    // Show a list of item items as clickable buttons
     return (
       <div>
-        {/* Use the title variable instead of hardcoded text */}
-        <p style={{ fontWeight: 'bold' }}>{title}</p>
+        <p style={{ fontWeight: 'bold', color: fontColor }}>{title}</p> {/* Set font color based on theme */}
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
-          {items.map((item: string, index: number) => ( // Changed item type to string
+          {items.map((item: string, index: number) => (
             <button
               key={index}
-              onClick={() => this.onItemClicked(item, index)} // Pass item directly
+              onClick={() => this.onItemClicked(item, index)}
               style={{
-                padding: '8px 12px', // Smaller padding
+                padding: '8px 12px',
                 cursor: 'pointer',
-                border: 'none', // No border
-                outline: 'none', // Remove blue border when clicked
+                border: 'none',
+                outline: 'none',
                 borderRadius: '5px',
-                backgroundColor: this.state.clickedIndex === index ? '#d0d0d0' : '#F0F2F6', // Change color if clicked
-                transition: 'background-color 0.3s', // Smooth transition for hover effect
-                fontSize: '14px', // Smaller font size
-                textAlign: 'left', // Align text to the left
-                width: '100%', // Make button take full width
-                display: 'flex', // Use flexbox for alignment
-                justifyContent: 'flex-start', // Align text to the left
+                backgroundColor: this.state.clickedIndex === index ? clickedColor : backgroundColor,
+                transition: 'background-color 0.3s',
+                fontSize: '14px',
+                textAlign: 'left',
+                width: '100%',
+                display: 'flex',
+                justifyContent: 'flex-start',
+                color: fontColor, // Set font color based on theme
               }}
-              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#e0e0e0'} // Hover effect
+              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = hoverColor}
               onMouseLeave={(e) => {
                 if (this.state.clickedIndex !== index) {
-                  e.currentTarget.style.backgroundColor = '#F0F2F6'; // Reset background color if not clicked
+                  e.currentTarget.style.backgroundColor = backgroundColor;
                 }
               }}
             >
