@@ -30,3 +30,8 @@ if selected:
     st.title(selected)
     st.image(images[selected], caption=selected)
 ```
+
+
+### Todo
+
+- [x] Read release notes from file
