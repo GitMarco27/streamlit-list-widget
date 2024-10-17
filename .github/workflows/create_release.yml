@@ -12,8 +12,14 @@ jobs:
     permissions:
       contents: write  # Ensure the token has the correct permissions
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Read CHANGELOG.md
+        id: changelog
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: ./CHANGELOG.md
 
       - name: Extract latest release notes
         id: extract_changelog
@@ -21,11 +27,12 @@ jobs:
           # Extract the tag (without 'refs/tags/' prefix) and assign it to a variable
           TAG=$(echo "${{ github.ref }}" | sed 's/refs\/tags\///')
 
-          # Extract the latest release notes from the CHANGELOG.md for the given tag
-          CHANGELOG=$(awk '/^## \[v/ {if (p) exit; } /^## \['"$TAG"'/ {p=1} p' CHANGELOG.md)
+          # Use sed to extract the release notes for the current tag
+          CHANGELOG=$(echo "${{ steps.changelog.outputs.content }}" | sed -n "/## \[$TAG/,/## \[v/p" | sed '$d')
 
-          # Set the changelog as an output variable
+          # Set the extracted changelog as an output variable
           echo "::set-output name=changelog::$CHANGELOG"
+
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
