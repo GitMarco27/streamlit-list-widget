@@ -18,9 +18,13 @@ jobs:
       - name: Extract latest release notes
         id: extract_changelog
         run: |
-          # Extract the latest release section from CHANGELOG.md
-          CHANGELOG=$(awk '/^## \[v/{flag=0} /^## \['${{ github.ref }}'/ {flag=1} flag' CHANGELOG.md)
-          # Set the changelog as an output variable
+          # Extract the tag (without 'refs/tags/' prefix) and assign it to a variable
+          TAG=$(echo "${{ github.ref }}" | sed 's/refs\/tags\///')
+
+          # Extract the latest release notes from the CHANGELOG.md for the given tag
+          CHANGELOG=$(awk '/^## \[v/{flag=0} /^## \['"$TAG"'/ {flag=1} flag' CHANGELOG.md)
+
+          # Set the extracted changelog as an output variable
           echo "::set-output name=changelog::$CHANGELOG"
 
       - name: Create Release
