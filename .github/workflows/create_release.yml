@@ -22,11 +22,10 @@ jobs:
           TAG=$(echo "${{ github.ref }}" | sed 's/refs\/tags\///')
 
           # Extract the latest release notes from the CHANGELOG.md for the given tag
-          CHANGELOG=$(awk '/^## \[v/{flag=0} /^## \['"$TAG"'/ {flag=1} flag' CHANGELOG.md)
+          CHANGELOG=$(awk '/^## \[v/ {if (p) exit; } /^## \['"$TAG"'/ {p=1} p' CHANGELOG.md)
 
-          # Set the extracted changelog as an output variable
+          # Set the changelog as an output variable
           echo "::set-output name=changelog::$CHANGELOG"
-
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
