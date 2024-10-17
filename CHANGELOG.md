@@ -4,6 +4,10 @@ All notable changes will be documented in this file.
 
 ## [Unreleased]
 
+## [v0.1.10] - 2024-10-17
+### Added
+- Fixing pipeline for reading CHANGELOG.md
+
 ## [v0.1.7] - 2024-10-17
 ### Added
 - Reading release notes from CHANGELOG.md
