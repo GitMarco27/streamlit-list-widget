@@ -1,12 +1,12 @@
+name: Create Release
+
 on:
   push:
     tags:
-      - 'v*' # Match tags like v1.0, v1.2.3, etc.
-
-name: Create Release
+      - 'v*'  # Match tags like v1.0, v1.2.3, etc.
 
 jobs:
-  build:
+  release:
     name: Create Release
     runs-on: ubuntu-latest
     permissions:
@@ -15,23 +15,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Read CHANGELOG.md
-        id: changelog
-        uses: juliangruber/read-file-action@v1
-        with:
-          path: ./CHANGELOG.md
-
-      - name: Extract latest release notes
-        id: extract_changelog
-        run: |
-          # Extract the tag (without 'refs/tags/' prefix) and assign it to a variable
-          TAG=$(echo "${{ github.ref }}" | sed 's/refs\/tags\///')
-
-          # Use sed to extract the release notes for the current tag
-          CHANGELOG=$(echo "${{ steps.changelog.outputs.content }}" | sed -n "/## \[$TAG/,/## \[v/p" | sed '$d')
-
-          # Set the extracted changelog as an output variable
-          echo "::set-output name=changelog::$CHANGELOG"
+      - name: Extract release notes
+        id: extract-release-notes
+        uses: ffurrer2/extract-release-notes@v2
 
       - name: Create Release
         id: create_release
@@ -43,6 +29,6 @@ jobs:
           release_name: Release ${{ github.ref }}
           body: |
             Changes in this Release:
-            ${{ steps.extract_changelog.outputs.changelog }}
+            ${{ steps.extract-release-notes.outputs.release_notes }}
           draft: false
           prerelease: false

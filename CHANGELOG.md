@@ -1,17 +1,17 @@
 # Changelog
 
-All notable changes will be documented in this file.
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
-## [v0.1.10] - 2024-10-17
-### Added
-- Fixing pipeline for reading CHANGELOG.md
+ - TODO
 
-## [v0.1.7] - 2024-10-17
+## [0.1.11] - 2024-10-17
 ### Added
-- Reading release notes from CHANGELOG.md
+ - Working on automatic changelog reading during releases
 
-## [v0.1.6] - 2024-10-13
-### Added
-- First Stable Release
+
+[unreleased]: https://github.com/gitmarco27/streamlit-list-widget/
